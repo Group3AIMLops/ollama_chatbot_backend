@@ -14,19 +14,20 @@ jobs:
 
     - name: Login to Docker hub
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
-      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME  }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
 
     - name: Build the Docker image
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME  }}
       run: docker build . -f Dockerfile -t $DOCKER_USER/chatbot_backend:latest
 
     - name: Push the Docker Image
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-      run: docker push $DOCKER_USER/chatbot_backend
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME  }}
+      run: docker push $DOCKER_USER/chatbot_backend:latest
 
     - name: Logout to Docker hub
       run: docker logout
+
