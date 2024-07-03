@@ -1,0 +1,12 @@
+recursive-include ./api *
+
+include ./requirements.txt
+include ./user_products.csv
+include ./ollama_functions.py
+
+
+exclude *.log
+exclude *.cfg
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
