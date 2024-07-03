@@ -11,6 +11,9 @@ RUN ls
 
 # Install dependencies from requirements.txt
 RUN pip install -r requirements.txt
+RUN curl -fsSL https://ollama.com/install.sh | sh
+RUN ollama serve
+RUN ollama pull phi3
 
 RUN mv ollama_functions.py \usr\local\lib\python3.9\site-packages\langchain_experimental\llms\ollama_functions.py
 
