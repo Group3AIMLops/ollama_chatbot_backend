@@ -38,6 +38,12 @@ load_dotenv()
 app = FastAPI()
 api_router = APIRouter()
 
+try:
+    subprocess.call(["ollama", "serve", "&", "sleep", "10", "&&", "ollama", "pull", "phi3"])
+except:
+    pass
+
+
 backend_ip = os.getenv("backend_ip")
 backend_port = os.getenv("backend_port")
 #use_sql = config.app_config.use_sql
@@ -86,11 +92,6 @@ def get_user_chats(USER_ID, prompt_template = prompt_template):
 
 @api_router.get("/backend_call", status_code=200)
 async def run_llm(USER_ID, text, user_selected_product = '', user_confirmation = '', func_to_call = ''):
-    
-    try:
-        subprocess.Popen(["ollama", "serve", "&", "sleep", "10", "&&", "ollama", "pull", "phi3"])
-    except:
-        return {'user_selected_product': '', 'orders' : None, 'message' : None, 'resp_type' : None, 'function_to_call' : None }
     
     USER_ID = int(USER_ID)
     if text == '':
