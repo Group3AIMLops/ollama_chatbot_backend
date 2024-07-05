@@ -32,6 +32,7 @@ import re
 import os
 from db import get_connection
 from dotenv import load_dotenv 
+import subprocess
 load_dotenv()
 
 app = FastAPI()
@@ -85,7 +86,12 @@ def get_user_chats(USER_ID, prompt_template = prompt_template):
 
 @api_router.get("/backend_call", status_code=200)
 async def run_llm(USER_ID, text, user_selected_product = '', user_confirmation = '', func_to_call = ''):
-
+    
+    try:
+        subprocess.Popen(["ollama", "serve"])
+    except:
+        return {'user_selected_product': '', 'orders' : None, 'message' : None, 'resp_type' : None, 'function_to_call' : None }
+    
     USER_ID = int(USER_ID)
     if text == '':
         return {'user_selected_product': '', 'orders' : None, 'message' : None, 'resp_type' : None, 'function_to_call' : None }
