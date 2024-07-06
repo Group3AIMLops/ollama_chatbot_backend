@@ -38,11 +38,10 @@ load_dotenv()
 app = FastAPI()
 api_router = APIRouter()
 
-try:
-    subprocess.call(["ollama", "serve", "&", "sleep", "10", "&&", "ollama", "pull", "phi3"])
-    print(subprocess.check_output(['ollama', 'list']).splitlines())
-except:
-    pass
+
+subprocess.call(["ollama", "serve", "&&", "sleep", "10", "&&", "ollama", "pull", "phi3"])
+print(subprocess.check_output(['ollama', 'list']).splitlines())
+
 
 
 backend_ip = os.getenv("backend_ip")
