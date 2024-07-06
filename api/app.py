@@ -39,7 +39,7 @@ app = FastAPI()
 api_router = APIRouter()
 
 
-print(subprocess.call(["ollama serve"]))
+print(subprocess.call(["ollama", "serve", "&&", "sleep", "10", "&&", "ollama", "pull", "phi3", "&&", "ollama", "list"], capture_output=True, shell=True))
 
 
 backend_ip = os.getenv("backend_ip")
