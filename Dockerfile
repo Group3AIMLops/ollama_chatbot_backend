@@ -24,7 +24,7 @@ RUN ollama serve & \
     ollama pull phi3
 
 # Move the customized Ollama functions
-RUN mv ollama_functions.py /usr/local/lib/python3.9/site-packages/langchain_experimental/llms/ollama_functions.py
+RUN mv ollama_functions.py /usr/local/lib/python3.12/site-packages/langchain_experimental/llms/ollama_functions.py
 
 # Expose the application port
 EXPOSE 8001
