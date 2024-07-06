@@ -40,7 +40,7 @@ api_router = APIRouter()
 
 
 subprocess.call(["ollama", "serve", "&&", "sleep", "10", "&&", "ollama", "pull", "phi3"])
-print(subprocess.check_output(['ollama', 'list']).splitlines())
+print(subprocess.check_output(['ollama', 'list'], text=True))
 
 
 
