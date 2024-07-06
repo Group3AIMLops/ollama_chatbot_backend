@@ -39,8 +39,8 @@ app = FastAPI()
 api_router = APIRouter()
 
 print('here')
-print(subprocess.call(["ollama", "serve", "&&", "sleep", "10", "&&", "ollama", "pull", "phi3", "&&", "ollama", "list"], shell=True))
-
+#print(subprocess.call(["ollama", "serve", "&&", "sleep", "10", "&&", "ollama", "pull", "phi3", "&&", "ollama", "list"], shell=True))
+print(os.system('ollama serve && sleep 10 && ollama pull phi3'))
 
 backend_ip = os.getenv("backend_ip")
 backend_port = os.getenv("backend_port")
