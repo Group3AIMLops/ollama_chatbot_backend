@@ -96,7 +96,7 @@ async def run_llm(USER_ID, text, user_selected_product = '', user_confirmation =
     
     USER_ID = int(USER_ID)
     if text == '':
-        return {'user_selected_product': '', 'orders' : None, 'message' : None, 'resp_type' : None, 'function_to_call' : None }
+        return {'user_selected_product': '', 'orders' : None, 'message' : 'Sorry I could not understand :( Could you please rephrase it?', 'resp_type' : None, 'function_to_call' : None }
     
     user_chats, order_id = get_user_chats(USER_ID, prompt_template)
     confirmation = user_confirmation
@@ -176,7 +176,11 @@ async def run_llm(USER_ID, text, user_selected_product = '', user_confirmation =
                 msg = 'Could you please help me to find the product you want help with? You can describe the product you have in mind or you can provide me the order id'
                 return {'user_selected_product': '', 'orders' : [], 'message' :  msg, 'resp_type' : None, 'function_to_call' : None }
             else:
-                return {'user_selected_product': '', 'orders' : [], 'message' :  msg, 'resp_type' : None, 'function_to_call' : None }
+                if len(msg) > 0:
+                    return {'user_selected_product': '', 'orders' : [], 'message' :  msg, 'resp_type' : None, 'function_to_call' : None }
+                else:
+                    msg = 'Sorry I could not understand :( Could you please rephrase it?'
+                    return {'user_selected_product': '', 'orders' : [], 'message' :  msg, 'resp_type' : None, 'function_to_call' : None }
             
     
     #LLM 2 will me called from here
