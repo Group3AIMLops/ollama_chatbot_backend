@@ -33,6 +33,8 @@ import os
 from db import get_connection
 from dotenv import load_dotenv 
 import subprocess
+from search_model import nnlm, knn, preprocessing, get_orders_from_nnlm
+
 load_dotenv()
 
 app = FastAPI()
@@ -98,16 +100,18 @@ async def run_llm(USER_ID, text, user_selected_product = '', user_confirmation =
     if text == '':
         return {'user_selected_product': '', 'orders' : None, 'message' : 'Sorry I could not understand :( Could you please rephrase it?', 'resp_type' : None, 'function_to_call' : None }
     
-    user_chats, order_id = get_user_chats(USER_ID, prompt_template)
+    
+    if user_selected_product == '':
+        order_ids = get_orders(text)
+        if len(order_ids) == 0:
+            order_ids = get_orders_from_nnlm(text, USER_ID, nnlm, knn)
+        if len(order_ids) == 0:
+            user_chats, order_id = get_user_chats(USER_ID, prompt_template)
+        
     confirmation = user_confirmation
     
-    
-    if (user_selected_product == '') & (order_id != ''):
-        user_selected_product = order_id
      
     if user_selected_product == '':
-        
-        order_ids = get_orders(text)
         
         if len(order_ids) > 0:
             if len(order_ids) > 1:
