@@ -67,7 +67,7 @@ def get_knn_model(nnlm):
         
     descriptions = user_products.description.to_list()
     
-    embeddings = nnlm([descriptions])
+    embeddings = nnlm(descriptions)
     
     neigh = NearestNeighbors(n_neighbors=1)
     neigh.fit(embeddings)
