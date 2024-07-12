@@ -43,6 +43,7 @@ api_router = APIRouter()
 def ollama():
     os.environ['OLLAMA_HOST'] = 'http://0.0.0.0:11434/'
     os.environ['OLLAMA_ORIGINS'] = '*'
+    os.environ['CUDA_VISIBLE_DEVICES'] = 0
     subprocess.Popen(["ollama", "serve"])
 
 ollama()
