@@ -1,7 +1,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This repository is a backend part of Customer Conversational Intelligence Platform Powered by an LLM Agent. This is created with help of fastapi [![fastapi][fast-image]][fast-url], Ollama [![Ollama][ollama-image]][ollama-url], Phi3 [![Phi3][phi3-image]][phi3-url]
+This repository is a backend part of Customer Conversational Intelligence Platform Powered by an LLM Agent. This is created with help of [![fastapi][fast-image]][fast-url] [![Ollama][ollama-image]][ollama-url] [![Phi3][phi3-image]][phi3-url]
 
 <!-- GETTING STARTED -->
 ## Getting Started
