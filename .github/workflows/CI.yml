@@ -2,7 +2,7 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - gpu_support
+      - disabled
   workflow_dispatch:
 
 jobs:
