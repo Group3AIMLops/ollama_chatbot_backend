@@ -2,7 +2,7 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - main
+      - disabled
   workflow_dispatch:
 
 jobs:
@@ -23,14 +23,14 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME  }}
       run: |
           COMMIT_SHA=$(git rev-parse --short=7 HEAD)
-          docker build . -f Dockerfile -t $DOCKER_USER/chatbot_backend:$COMMIT_SHA
+          docker build . -f Dockerfile -t $DOCKER_USER/chatbot_backend:gpu_support$COMMIT_SHA
 
     - name: Push the Docker Image
       env:
         DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME  }}
       run: |
           COMMIT_SHA=$(git rev-parse --short=7 HEAD)
-          docker push $DOCKER_USER/chatbot_backend:$COMMIT_SHA
+          docker push $DOCKER_USER/chatbot_backend:gpu_support$COMMIT_SHA
 
     - name: Logout to Docker hub
       run: docker logout
